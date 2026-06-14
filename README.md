@@ -1,95 +1,75 @@
-# TurboQuant WASM
+[update-readmes]   Mode: rewrite — migrating to template structure...
+# turboquant-wasm
 
-[![CI](https://github.com/teamchong/turboquant-wasm/actions/workflows/ci.yml/badge.svg)](https://github.com/teamchong/turboquant-wasm/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/turboquant-wasm)](https://www.npmjs.com/package/turboquant-wasm)
-[![gzip size](https://img.shields.io/badge/gzip-~12kB-blue)](https://www.npmjs.com/package/turboquant-wasm)
-[![license](https://img.shields.io/npm/l/turboquant-wasm)](https://github.com/teamchong/turboquant-wasm/blob/main/LICENSE)
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/turboquant-wasm)
 
-Experimental WASM + relaxed SIMD build of [botirk38/turboquant](https://github.com/botirk38/turboquant) for browsers and Node.js.
+<!-- AI:start:what-it-does -->
+_Description pending._
+<!-- AI:end:what-it-does -->
 
-Based on the paper ["TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate"](https://arxiv.org/abs/2504.19874) (Google Research, ICLR 2026).
+## Architecture
 
-**[Live Demo](https://teamchong.github.io/turboquant-wasm/)** — vector search, image similarity, and 3D Gaussian Splatting compression running in the browser.
+<!-- AI:start:architecture -->
+_Architecture documentation pending._
+<!-- AI:end:architecture -->
 
-## What this adds
+## Install
 
-- **npm package** with embedded WASM — `npm install turboquant-wasm`
-- **Relaxed SIMD** — `@mulAdd` FMA maps to `f32x4.relaxed_madd`
-- **SIMD-vectorized** QJL sign packing/unpacking and scaling
-- **TypeScript API** — `TurboQuant.init()` / `encode()` / `decode()` / `dot()`
-- **Golden-value tests** — byte-identical output with the reference Zig implementation
-
-## Browser Requirements
-
-The WASM binary uses relaxed SIMD instructions:
-
-| Runtime | Minimum Version |
-|---------|----------------|
-| Chrome | 114+ |
-| Firefox | 128+ |
-| Safari | 18+ |
-| Node.js | 20+ |
-
-## Quick Start
-
-```ts
-import { TurboQuant } from "turboquant-wasm";
-
-const tq = await TurboQuant.init({ dim: 1024, seed: 42 });
-
-// Compress a vector (~4.5 bits/dim, ~6x compression)
-const compressed = tq.encode(myFloat32Array);
-
-// Decode back
-const decoded = tq.decode(compressed);
-
-// Fast dot product without decoding
-const score = tq.dot(queryVector, compressed);
-
-tq.destroy();
-```
-
-## API
-
-```ts
-class TurboQuant {
-  static async init(config: { dim: number; seed: number }): Promise<TurboQuant>;
-  encode(vector: Float32Array): Uint8Array;
-  decode(compressed: Uint8Array): Float32Array;
-  dot(query: Float32Array, compressed: Uint8Array): number;
-  destroy(): void;
-}
-```
-
-## Building
+<!-- Add installation instructions here. This section is yours — the AI will not modify it. -->
 
 ```bash
-# Run tests
-zig test -target aarch64-macos src/turboquant.zig
-
-# Full npm build (zig -> wasm-opt -> base64 embed -> bun + tsc)
-bun run build
-
-# Build WASM only
-bun run build:zig
+git clone https://github.com/Interested-Deving-1896/turboquant-wasm.git
+cd turboquant-wasm
 ```
 
-Requires Zig 0.15.2 and Bun.
+## Usage
 
-## Quality
+<!-- Add usage examples here. This section is yours — the AI will not modify it. -->
 
-Encoding preserves inner products — verified by golden-value tests and distortion bounds:
+## Configuration
 
-- **MSE** decreases with dimension (unit vectors)
-- **Bits/dim** is ~4.5 (payload only, excluding 22-byte header)
-- **Dot product preservation** — mean absolute error < 1.0 for unit vectors at dim=128
-- **Bit-identical** output with [botirk38/turboquant](https://github.com/botirk38/turboquant) for same input + seed
+<!-- Document configuration options here. This section is yours — the AI will not modify it. -->
 
-## Credits
+## CI
 
-- [botirk38/turboquant](https://github.com/botirk38/turboquant) — original Zig implementation
-- [TurboQuant paper](https://arxiv.org/abs/2504.19874) (Google Research, ICLR 2026) — algorithm design
+<!-- AI:start:ci -->
+_CI documentation pending._
+<!-- AI:end:ci -->
+
+## Mirror chain
+
+<!-- AI:start:mirror-chain -->
+This repo is maintained in [`Interested-Deving-1896/turboquant-wasm`](https://github.com/Interested-Deving-1896/turboquant-wasm) and mirrored through:
+
+```
+Interested-Deving-1896/turboquant-wasm  ──►  OpenOS-Project-OSP/turboquant-wasm  ──►  OpenOS-Project-Ecosystem-OOC/turboquant-wasm
+```
+
+Changes flow downstream automatically via the hourly mirror chain in
+[`fork-sync-all`](https://github.com/Interested-Deving-1896/fork-sync-all).
+Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-Deving-1896`.
+<!-- AI:end:mirror-chain -->
+
+## Contributors
+
+<!-- AI:start:contributors -->
+_Contributors pending._
+<!-- AI:end:contributors -->
+
+## Origins
+
+<!-- AI:start:origins -->
+_Original project — no upstream fork._
+<!-- AI:end:origins -->
+
+## Resources
+
+<!-- AI:start:resources -->
+_No additional resource files found._
+<!-- AI:end:resources -->
 
 ## License
 
-MIT
+<!-- AI:start:license -->
+[MIT](https://github.com/Interested-Deving-1896/turboquant-wasm/blob/main/LICENSE) © 2026 [Interested-Deving-1896](https://github.com/Interested-Deving-1896)
+<!-- AI:end:license -->
